@@ -12,7 +12,7 @@ body {
   background:
     radial-gradient(circle at top left, rgba(173, 216, 255, 0.55), transparent 30%),
     radial-gradient(circle at bottom right, rgba(120, 180, 255, 0.35), transparent 30%),
-    linear-gradient(135deg, #dff4ff, #b7dcff, #82b7f7, #4b7fd1);
+    linear-gradient(135deg, #e8f7ff, #cde8ff, #95c6ff, #5f93e6);
   color: #16345d;
   overflow-x: hidden;
   position: relative;
@@ -23,21 +23,80 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 16px;
+  padding: 56px 20px;
+  position: relative;
+  z-index: 2;
 }
+
+.scene-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.decor {
+  position: absolute;
+  user-select: none;
+  filter: drop-shadow(0 8px 18px rgba(19, 62, 122, 0.18));
+}
+
+.cat {
+  font-size: clamp(2rem, 4vw, 3rem);
+  animation: floatCat 4s ease-in-out infinite;
+}
+
+.flower {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  animation: swayFlower 5s ease-in-out infinite;
+}
+
+.cat-1 { top: 7%; left: 8%; animation-delay: 0s; }
+.cat-2 { top: 16%; right: 8%; animation-delay: 0.8s; }
+.cat-3 { bottom: 13%; left: 5%; animation-delay: 1.4s; }
+.cat-4 { bottom: 10%; right: 7%; animation-delay: 2s; }
+.cat-5 { top: 48%; left: 2%; animation-delay: 2.6s; }
+.cat-6 { top: 54%; right: 2%; animation-delay: 3.2s; }
+
+.flower-1 { top: 4%; left: 24%; animation-delay: 0.2s; }
+.flower-2 { top: 10%; right: 24%; animation-delay: 1s; }
+.flower-3 { bottom: 7%; left: 23%; animation-delay: 1.8s; }
+.flower-4 { bottom: 6%; right: 24%; animation-delay: 2.6s; }
+.flower-5 { top: 28%; left: 10%; animation-delay: 0.6s; }
+.flower-6 { top: 33%; right: 11%; animation-delay: 2.2s; }
+.flower-7 { bottom: 28%; left: 11%; animation-delay: 1.2s; }
+.flower-8 { bottom: 30%; right: 10%; animation-delay: 3s; }
 
 .card {
   width: 100%;
-  max-width: 900px;
-  background: rgba(255, 255, 255, 0.18);
+  max-width: 920px;
+  background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 28px;
-  padding: 36px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 30px;
+  padding: 38px 30px;
   box-shadow: 0 20px 60px rgba(16, 56, 110, 0.25);
   position: relative;
   overflow: hidden;
+}
+
+.card::before,
+.card::after {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.9;
+}
+
+.card::before {
+  content: "🌸";
+  top: 18px;
+  left: 18px;
+}
+
+.card::after {
+  content: "🐱";
+  bottom: 18px;
+  right: 18px;
 }
 
 .top-glow {
@@ -52,7 +111,7 @@ body {
 
 .monthsary {
   display: inline-block;
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.5);
   color: #1f4f8a;
   padding: 8px 16px;
   border-radius: 999px;
@@ -82,7 +141,7 @@ h1 {
 }
 
 .letter p {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.28);
   padding: 16px 18px;
   border-radius: 18px;
   border-left: 4px solid rgba(61, 122, 201, 0.45);
@@ -120,10 +179,28 @@ button:hover {
 
 .song-box {
   text-align: center;
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.35);
   padding: 22px 18px;
   border-radius: 22px;
+  position: relative;
+}
+
+.song-box::before,
+.song-box::after {
+  position: absolute;
+  top: 14px;
+  font-size: 1.5rem;
+}
+
+.song-box::before {
+  content: "🌷";
+  left: 18px;
+}
+
+.song-box::after {
+  content: "🐾";
+  right: 18px;
 }
 
 .song-label {
@@ -166,7 +243,8 @@ button:hover {
   transform: translateX(-50%) translateY(0);
 }
 
-.background-hearts {
+.background-hearts,
+.floating-petals {
   position: fixed;
   inset: 0;
   overflow: hidden;
@@ -174,12 +252,19 @@ button:hover {
   z-index: 0;
 }
 
-.heart {
+.heart,
+.petal {
   position: absolute;
-  bottom: -30px;
-  font-size: 16px;
+  bottom: -40px;
+  opacity: 0.8;
+}
+
+.heart {
   animation: floatUp linear forwards;
-  opacity: 0.75;
+}
+
+.petal {
+  animation: petalFloat linear forwards;
 }
 
 .fade-in {
@@ -203,11 +288,54 @@ button:hover {
     opacity: 0;
   }
   10% {
-    opacity: 0.8;
+    opacity: 0.85;
   }
   100% {
     transform: translateY(-110vh) scale(1.4);
     opacity: 0;
+  }
+}
+
+@keyframes petalFloat {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-110vh) translateX(55px) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes floatCat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(4deg);
+  }
+}
+
+@keyframes swayFlower {
+  0%, 100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(5deg);
+  }
+}
+
+@media (max-width: 900px) {
+  .cat-5,
+  .cat-6,
+  .flower-5,
+  .flower-6,
+  .flower-7,
+  .flower-8 {
+    display: none;
   }
 }
 
@@ -225,4 +353,19 @@ button:hover {
   .song-box h2 {
     font-size: 1.5rem;
   }
+
+  .cat,
+  .flower {
+    font-size: 1.8rem;
+  }
+
+  .cat-1 { top: 3%; left: 2%; }
+  .cat-2 { top: 5%; right: 2%; }
+  .cat-3 { bottom: 9%; left: 2%; }
+  .cat-4 { bottom: 9%; right: 2%; }
+
+  .flower-1 { top: 14%; left: 3%; }
+  .flower-2 { top: 14%; right: 3%; }
+  .flower-3 { bottom: 20%; left: 4%; }
+  .flower-4 { bottom: 20%; right: 4%; }
 }
