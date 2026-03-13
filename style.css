@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(173, 216, 255, 0.55), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(120, 180, 255, 0.35), transparent 30%),
+    linear-gradient(135deg, #dff4ff, #b7dcff, #82b7f7, #4b7fd1);
+  color: #16345d;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+.card {
+  width: 100%;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 28px;
+  padding: 36px 28px;
+  box-shadow: 0 20px 60px rgba(16, 56, 110, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.top-glow {
+  position: absolute;
+  top: -80px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(173, 216, 255, 0.95), transparent 65%);
+  pointer-events: none;
+}
+
+.monthsary {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.45);
+  color: #1f4f8a;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: #0f3466;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #35639d;
+  margin-bottom: 28px;
+  font-size: 1rem;
+}
+
+.letter {
+  display: grid;
+  gap: 18px;
+  line-height: 1.9;
+  font-size: 1rem;
+  color: #173b69;
+}
+
+.letter p {
+  background: rgba(255, 255, 255, 0.25);
+  padding: 16px 18px;
+  border-radius: 18px;
+  border-left: 4px solid rgba(61, 122, 201, 0.45);
+}
+
+.closing {
+  font-weight: 600;
+  color: #0f3466;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  margin: 28px 0 24px;
+}
+
+button {
+  border: none;
+  outline: none;
+  background: linear-gradient(135deg, #1d5fbf, #6fbaff);
+  color: white;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(30, 74, 145, 0.28);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+button:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 14px 32px rgba(30, 74, 145, 0.34);
+}
+
+.song-box {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 22px 18px;
+  border-radius: 22px;
+}
+
+.song-label {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.78rem;
+  color: #4f79aa;
+  margin-bottom: 8px;
+}
+
+.song-box h2 {
+  font-size: 1.8rem;
+  color: #103b72;
+  margin-bottom: 4px;
+}
+
+.artist {
+  color: #315f97;
+  font-size: 1rem;
+}
+
+.floating-message {
+  position: fixed;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%) translateY(30px);
+  background: rgba(16, 59, 114, 0.9);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.35s ease;
+  z-index: 20;
+}
+
+.floating-message.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.background-hearts {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heart {
+  position: absolute;
+  bottom: -30px;
+  font-size: 16px;
+  animation: floatUp linear forwards;
+  opacity: 0.75;
+}
+
+.fade-in {
+  animation: fadeInUp 1.1s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-110vh) scale(1.4);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 24px 18px;
+    border-radius: 22px;
+  }
+
+  .letter {
+    font-size: 0.96rem;
+    gap: 14px;
+  }
+
+  .song-box h2 {
+    font-size: 1.5rem;
+  }
+}
